@@ -79,7 +79,7 @@ class MKD_Air_Quality {
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->plugin_name = 'mkd-air-quality';
+		$this->plugin_name = 'wp-mkd-air-quality';
 
 		$this->load_dependencies();
 		$this->set_locale();

@@ -115,9 +115,9 @@ class MKD_Air_Quality_Public {
 			'nonce'    => wp_create_nonce( 'mkdaiq_nonce' ),
 			'strings'  => array(
 				'micrograms'             => 'µg/m3',
-				'not_measured'           => __( 'Not measured', 'mkd-air-quality' ),
-				'measurements_not_found' => __( 'No measurements found.', 'mkd-air-quality' ),
-				'unable_to_initialize'   => __( 'Unable to initialize the Air Quality element.', 'mkd-air-quality' ),
+				'not_measured'           => __( 'Not measured', 'wp-mkd-air-quality' ),
+				'measurements_not_found' => __( 'No measurements found.', 'wp-mkd-air-quality' ),
+				'unable_to_initialize'   => __( 'Unable to initialize the Air Quality element.', 'wp-mkd-air-quality' ),
 			),
 			'config'   => array(
 				'colors' => apply_filters( 'mkdaiq_chart_colors', array(
@@ -324,19 +324,21 @@ class MKD_Air_Quality_Public {
 		}
 
 		// Labels
+		$format= get_option('date_format');
 		$dt = DateTime::createFromFormat('Y-m-d', $date);
-		$footer = array( $dt->format('M d, Y') );
+		$date_str = wp_date($format, $dt->getTimestamp());
+		$footer = array( $date_str );
 		if ( $type === 'last' ) {
-			array_push( $footer, __( 'Last Value', 'mkd-air-quality' ) );
+			array_push( $footer, __( 'Last Value', 'wp-mkd-air-quality' ) );
 		} else {
-			array_push( $footer, __( 'Average Value', 'mkd-air-quality' ) );
+			array_push( $footer, __( 'Average Value', 'wp-mkd-air-quality' ) );
 		}
 		if ( $timemode === 'Day' ) {
-			array_push( $footer, __( 'Daily', 'mkd-air-quality' ) );
+			array_push( $footer, __( 'Daily', 'wp-mkd-air-quality' ) );
 		} elseif ( $timemode === 'Week' ) {
-			array_push( $footer, __( 'Weekly', 'mkd-air-quality' ) );
+			array_push( $footer, __( 'Weekly', 'wp-mkd-air-quality' ) );
 		} elseif ( $timemode === 'Month' ) {
-			array_push( $footer, __( 'Monthly', 'mkd-air-quality' ) );
+			array_push( $footer, __( 'Monthly', 'wp-mkd-air-quality' ) );
 		}
 
 		$path = plugin_dir_path( __FILE__ ) . 'partials/rank.php';

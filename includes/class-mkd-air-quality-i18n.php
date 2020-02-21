@@ -35,13 +35,10 @@ class MKD_Air_Quality_i18n {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'mkd-air-quality',
+			'wp-mkd-air-quality',
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);
 
 	}
-
-
-
 }

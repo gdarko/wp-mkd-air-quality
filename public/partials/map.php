@@ -10,7 +10,7 @@
     <?php if(intval($units_selector)): ?>
     <div class="mkdaiq-header">
         <div class="mkdaiq-header-filter">
-            <label><?php _e( 'Unit:', 'mkd-air-quality' ); ?></label>
+            <label><?php _e( 'Unit:', 'wp-mkd-air-quality' ); ?></label>
             <select class="mkdaiq-control mkdaiq-select-unit">
                 <?php foreach($units as $key => $u): ?>
                 <option value="<?php echo $key; ?>" <?php selected($unit, $key); ?>><?php echo $u['name']; ?></option>

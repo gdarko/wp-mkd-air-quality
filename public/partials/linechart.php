@@ -19,7 +19,7 @@
     <div class="mkdaiq-header">
         <?php if($stations_selector && count($stations) > 1): ?>
         <div class="mkdaiq-header-filter">
-            <label><?php _e('Station:', 'mkd-air-quality'); ?></label>
+            <label><?php _e('Station:', 'wp-mkd-air-quality'); ?></label>
             <select class="mkdaiq-control mkdaiq-select-station">
                 <?php foreach($stations as $key => $s): ?>
                 <option value="<?php echo $key; ?>" <?php selected($station, $key); ?>><?php echo $s['name']; ?></option>

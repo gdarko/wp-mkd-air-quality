@@ -2,7 +2,7 @@
 
 return array(
 	'Skopje' => array(
-		'name'     => __( 'Skopje Region', 'mkd-air-quality' ),
+		'name'     => __( 'Skopje Region', 'wp-mkd-air-quality' ),
 		'stations' => array(
 			'Centar',
 			'GaziBaba',
@@ -15,7 +15,7 @@ return array(
 		),
 	),
 	'Western' => array(
-		'name'     => __( 'Western Region', 'mkd-air-quality' ),
+		'name'     => __( 'Western Region', 'wp-mkd-air-quality' ),
 		'stations' => array(
 			'Bitola1',
 			'Bitola2',
@@ -26,7 +26,7 @@ return array(
 		)
 	),
 	'Eastern' => array(
-		'name'     => __( 'Eastern Region', 'mkd-air-quality' ),
+		'name'     => __( 'Eastern Region', 'wp-mkd-air-quality' ),
 		'stations' => array(
 			'Veles2',
 			'Kavadarci',
