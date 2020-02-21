@@ -81,7 +81,7 @@ return array(
 		'lat'  => 41.439137,
 		'lng'  => 22.64316,
 	),
-	'Veles 2'     => array(
+	'Veles2'     => array(
 		'name' => 'Veles 2',
 		'lat'  => 41.707627,
 		'lng'  => 21.760984,
