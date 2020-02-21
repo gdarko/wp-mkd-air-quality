@@ -335,7 +335,7 @@
         // Methods
         self.initializeMap = function (station, timemode, unit, date) {
 
-            var center = [41.6031, 21.4948];
+            var center = [41.5559, 21.7365];
             if(!zoom) {
                 zoom = 8;
             }
