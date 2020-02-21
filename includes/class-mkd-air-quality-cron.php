@@ -60,7 +60,6 @@ class MKD_Air_Quality_Cron {
 
 	}
 
-
 	/**
 	 * Self clean the database cache daily.
 	 *

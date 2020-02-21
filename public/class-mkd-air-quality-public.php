@@ -106,6 +106,7 @@ class MKD_Air_Quality_Public {
 			'ajax_url' => admin_url( 'admin-ajax.php' ),
 			'nonce'    => wp_create_nonce( 'mkdaiq_nonce' ),
 			'strings'  => array(
+				'micrograms' => 'µg/m3',
 				'not_measured' => __('Not measured', 'mkd-air-quality'),
 				'measurements_not_found' => __('No measurements found.', 'mkd-air-quality'),
 				'unable_to_initialize' => __( 'Unable to initialize the Air Quality element.', 'mkd-air-quality' ),

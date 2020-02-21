@@ -99,6 +99,7 @@
             html += '<div class="mkdaiq-map-head"><h3>'+stationName+'</h3><h4>'+date+'</h4></div>';
             html += '<div class="mkdaiq-map-body">';
             html += '<table class="mkdaiq-map-data">';
+            stationData = stationData.reverse();
             for(var i in stationData) {
 
                 var _date = window.MKDAIQ_convertDate(stationData[i].date);
@@ -117,7 +118,7 @@
                 html += _date.toLocaleTimeString();
                 html += '</td>';
                 html += '<td class="mkdaiq-map-data-value">';
-                html += value;
+                html += value + ' ' + MKDAIQ.strings.micrograms;
                 html += '</td>';
                 html += '</tr>';
             }
@@ -212,7 +213,12 @@
                                         display: x_labels // (true/false)
                                     }
 								}]
-							}
+							},
+                            tooltips: {
+                                callbacks: {
+                                    label: (item) => `${item.yLabel} ${MKDAIQ.strings.micrograms}`,
+                                },
+                            },
                         };
 
 
