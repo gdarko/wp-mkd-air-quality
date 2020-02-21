@@ -46,6 +46,12 @@ class MKD_Air_Quality_Public {
 	private $api;
 
 	/**
+	 * The data helper
+	 * @var MKD_Air_Quality_Helper
+	 */
+	private $data_helper;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @param  string  $plugin_name  The name of the plugin.
@@ -58,6 +64,7 @@ class MKD_Air_Quality_Public {
 		$this->plugin_name = $plugin_name;
 		$this->version     = $version;
 		$this->api         = new MKDAQAPI();
+		$this->data_helper = new MKD_Air_Quality_Helper();
 
 	}
 
@@ -70,6 +77,7 @@ class MKD_Air_Quality_Public {
 	public function register_shortcodes() {
 		add_shortcode( 'mkdaiq_chart', array( $this, 'shortcode_linechart' ) );
 		add_shortcode( 'mkdaiq_map', array( $this, 'shortcode_map' ) );
+		add_shortcode( 'mkdaiq_rank', array( $this, 'shortcode_rank' ) );
 	}
 
 	/**
@@ -229,6 +237,113 @@ class MKD_Air_Quality_Public {
 
 		return ob_get_clean();
 
+	}
+
+	/**
+	 * Pollution rank
+	 *
+	 * @param $args
+	 *
+	 * @return false|string
+	 */
+	public function shortcode_rank( $args ) {
+
+		$defaults = array(
+			'date'     => 'today',
+			'timemode' => 'Day',
+			'unit'     => 'PM10',
+			'type'     => 'last', // last or average
+			'order'    => 1
+		);
+
+		$args       = shortcode_atts( $defaults, $args );
+		$stations   = MKDAQAPI::get_stations();
+		$stations_q = implode( ',', array_keys( $stations ) );
+		if ( $args['date'] === 'today' || empty( $args['date'] ) ) {
+			$args['date'] = date( 'Y-m-d' );
+		}
+
+		$unit     = $args['unit'];
+		$date     = $args['date'];
+		$timemode = $args['timemode'];
+		$type     = $args['type'];
+
+
+		try {
+			$data = $this->api->query( $stations_q, $args['date'], $args['unit'], $args['timemode'] );
+			if ( ! isset( $data['measurements'] ) || empty( $data['measurements'] ) ) {
+				$data = array();
+			}
+		} catch ( Exception $e ) {
+			$data = array();
+		}
+
+		$stationValues = array();
+		$stationIndicators = array();
+		if(!empty($data)) {
+			$stationData = array();
+			foreach ( $data['measurements'] as $time => $s ) {
+				foreach ( $s as $key => $value ) {
+					if($value === '') {
+						continue;
+					}
+					if ( ! isset( $stationData[ $key ] ) ) {
+						$stationData[ $key ] = array();
+					}
+					array_push( $stationData[ $key ], floatval( $value ) );
+				}
+			}
+			foreach($stationData as $key => $values) {
+				if($args['type'] === 'average') {
+					$stationTotal = array_sum( $values );
+					$stationCount = count( $values );
+					if ( $stationTotal === 0 || $stationCount === 0 ) {
+						continue;
+					}
+					$stationValue = (float) $stationTotal / $stationCount;
+				} else {
+					$stationValue = null;
+					for ( $i = count( $values ) - 1; $i >= 0; $i -- ) {
+						if ( is_numeric( $values[ $i ] ) && $values[ $i ] > 0 ) {
+							$stationValue = $values[ $i ];
+							break;
+						}
+					}
+					if ( is_null( $stationValue ) ) {
+						continue;
+					}
+				}
+				$stationValues[ $key ]     = $stationValue;
+				$stationIndicators[ $key ] = $this->data_helper->get_quality_range( $stationValue, $unit );
+			}
+			if ( $args['order'] ) {
+				asort( $stationValues, SORT_NUMERIC );
+				$stationValues = array_reverse( $stationValues, true );
+			}
+
+		}
+
+		// Labels
+		$dt = DateTime::createFromFormat('Y-m-d', $date);
+		$footer = array( $dt->format('M d, Y') );
+		if ( $type === 'last' ) {
+			array_push( $footer, __( 'Last Value', 'mkd-air-quality' ) );
+		} else {
+			array_push( $footer, __( 'Average Value', 'mkd-air-quality' ) );
+		}
+		if ( $timemode === 'Day' ) {
+			array_push( $footer, __( 'Daily', 'mkd-air-quality' ) );
+		} elseif ( $timemode === 'Week' ) {
+			array_push( $footer, __( 'Weekly', 'mkd-air-quality' ) );
+		} elseif ( $timemode === 'Month' ) {
+			array_push( $footer, __( 'Monthly', 'mkd-air-quality' ) );
+		}
+
+		$path = plugin_dir_path( __FILE__ ) . 'partials/rank.php';
+		ob_start();
+		include $path;
+
+		return ob_get_clean();
 	}
 
 }

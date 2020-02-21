@@ -57,6 +57,10 @@
     overflow-y: auto;
     height: 200px;
 }
+.mkdaiq-icon-col {
+    width:50px;
+    text-align:center;
+}
 .mkdaiq-pin {
     width: 60px;
     height: 60px;
@@ -67,21 +71,31 @@
     margin: -30px 0 0 -30px;
     border: 1px solid #848484;
 }
-.mkdaiq-pin-undefined {
+.mkdaiq-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.mkdaiq-color-undefined {
     background-color: #ffffff;
 }
-.mkdaiq-pin-verylow{
+.mkdaiq-color-verylow{
      background-color: #5bfd42;
  }
-.mkdaiq-pin-low {
+.mkdaiq-color-low {
     background-color: #99cc00;
 }
-.mkdaiq-pin-medium {
+.mkdaiq-color-medium {
     background-color: #fcd827;
 }
-.mkdaiq-pin-high {
+.mkdaiq-color-high {
     background-color: #efa003;
 }
-.mkdaiq-pin-veryhigh {
+.mkdaiq-color-veryhigh {
     background-color: #e11188;
+}
+
+.mkdaiq-table-footer td {
+    text-align: center;
 }

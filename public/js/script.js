@@ -391,7 +391,7 @@
                             qualityRange = window.MKDAIQ_Quality_Range(lastResult, unitInfo);
                             qualitySlug = qualityRange !== null && qualityRange.hasOwnProperty('slug') ? qualityRange['slug'] : 'undefined';
                             customIcon = L.divIcon({
-                                className: 'mkdaiq-pin mkdaiq-pin-' + qualitySlug,
+                                className: 'mkdaiq-pin mkdaiq-color-' + qualitySlug,
                                 iconSize: new L.Point(30, 30)
                             });
                             marker = L.marker([lat, lng], {icon: customIcon}).addTo(mapInstance);
