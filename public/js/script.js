@@ -303,10 +303,17 @@
         var unit = self.data('unit');
         var date = self.data('date');
 
+        /**
+         * Leaflet instance
+         * @type L.Map
+         */
         var mapInstance = null;
 
         // Methods
         self.initializeMap = function (station, timemode, unit, date) {
+
+            var center = [41.6031, 21.4948];
+            var zoom   = 9;
 
             var map_id = main_element.attr('id');
             $.ajax({
@@ -320,13 +327,15 @@
                 success: function (response) {
 
                     if(mapInstance !== null) {
+                        center = mapInstance.getCenter();
+                        zoom = mapInstance.getZoom();
                         mapInstance.off();
                         mapInstance.remove();
                     }
 
                     if (response.success) {
 
-                        mapInstance = L.map(map_id).setView([41.6031, 21.4948], 9);
+                        mapInstance = L.map(map_id).setView(center, zoom);
                         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                             attribution: ''
                         }).addTo(mapInstance);
