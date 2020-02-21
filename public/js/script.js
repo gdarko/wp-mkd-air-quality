@@ -106,6 +106,8 @@
                 value = stationData[i].value;
                 if(value === '') {
                     value = MKDAIQ.strings.not_measured;
+                } else {
+                    value += ' ' + MKDAIQ.strings.micrograms;
                 }
                 var style;
                 if(i > 5) {
@@ -118,7 +120,7 @@
                 html += _date.toLocaleTimeString();
                 html += '</td>';
                 html += '<td class="mkdaiq-map-data-value">';
-                html += value + ' ' + MKDAIQ.strings.micrograms;
+                html += value;
                 html += '</td>';
                 html += '</tr>';
             }
