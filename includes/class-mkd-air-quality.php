@@ -58,6 +58,13 @@ class MKD_Air_Quality {
 	protected $version;
 
 	/**
+	 * The cron manager
+	 *
+	 * @var MKD_Air_Quality_Cron
+	 */
+	protected $cron;
+
+	/**
 	 * Define the core functionality of the plugin.
 	 *
 	 * Set the plugin name and the plugin version that can be used throughout the plugin.
@@ -78,6 +85,7 @@ class MKD_Air_Quality {
 		$this->set_locale();
 		$this->define_admin_hooks();
 		$this->define_public_hooks();
+		$this->define_cron_tasks();
 
 	}
 
@@ -134,7 +142,13 @@ class MKD_Air_Quality {
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-mkd-air-quality-public.php';
 
+		/**
+		 * The class responsible for managing the cron tasks
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-mkd-air-quality-cron.php';
+
 		$this->loader = new MKD_Air_Quality_Loader();
+		$this->cron = new MKD_Air_Quality_Cron();
 
 	}
 
@@ -193,7 +207,23 @@ class MKD_Air_Quality {
 		$this->loader->add_action( 'wp_ajax_mkdaiq_query_map_data', $plugin_ajax, 'query_map_data' );
 		$this->loader->add_action( 'wp_ajax_nopriv_mkdaiq_query_map_data', $plugin_ajax, 'query_map_data' );
 
+		add_action('init', function(){
+			do_action('mkdaiq_self_clean');
+		});
+
 		$plugin_public->register_shortcodes();
+
+	}
+
+	/**
+	 * Register all the required cron tasks
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function define_cron_tasks() {
+
+		$this->loader->add_action( 'init', $this->cron, 'schedule_hooks' );
+		$this->cron->attach_hooks();
 
 	}
 

@@ -106,9 +106,7 @@ class MKDAQAPI {
 		$data = get_transient( $cache_key );
 		if ( false === $data ) {
 			$endpoint = $this->get_endpoint( $station, $end_date, $parameter, $time_mode );
-
-			error_log($endpoint);
-
+			//error_log($endpoint);
 			$data     = wp_remote_get( $endpoint, array( 'timeout' => 500 ) );
 			if ( is_wp_error( $data ) ) {
 				throw new \Exception( $data->get_error_message() );
