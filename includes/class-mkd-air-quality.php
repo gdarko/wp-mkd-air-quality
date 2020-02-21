@@ -207,10 +207,6 @@ class MKD_Air_Quality {
 		$this->loader->add_action( 'wp_ajax_mkdaiq_query_map_data', $plugin_ajax, 'query_map_data' );
 		$this->loader->add_action( 'wp_ajax_nopriv_mkdaiq_query_map_data', $plugin_ajax, 'query_map_data' );
 
-		add_action('init', function(){
-			do_action('mkdaiq_self_clean');
-		});
-
 		$plugin_public->register_shortcodes();
 
 	}
