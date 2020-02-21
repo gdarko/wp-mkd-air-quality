@@ -43,10 +43,15 @@ Draw PM10 map for today, hide the units selector.
 Draw PM10 map with zoom 8 for 2020 New Year's day and show units field.
 `[mkdaiq_map date='2020-01-01' zoom=8]`
 
+#### RANK
 
-### TODO
-* Most polluted places
-* Air quality table
+Defaults: (`date=today`, `unit=PM10`, `type=last`, `order=1`)
+
+Draw PM10 rank table for today based on the last known result ordered by most polluted
+`[mkdaiq_rank date='today' timemode='Day' type='last' order='1']`
+
+Draw PM10 rank table for the last 7 days based on the average result ordered by most polluted
+`[mkdaiq_rank date='today' timemode='Week' type='average' order='1']`
 
 == Installation ==
 
@@ -62,10 +67,10 @@ To contribute please submit pull request or issue on the Github repository.
 == Screenshots ==
 
 1. Line Chart
-2. Map
+2. Map (OSM)
+3. Rank Table
 
 == Changelog ==
 
 = 1.0 =
-* A change since the previous version.
-* Another change.
+* Initial Version
