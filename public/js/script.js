@@ -94,6 +94,7 @@
 
         var html = '<div class="mkdaiq-map-pupup">';
         var value;
+        var style;
         if(stationData.length > 0) {
             var stationName = station + ' ('+ unit + ')';
             html += '<div class="mkdaiq-map-head"><h3>'+stationName+'</h3><h4>'+date+'</h4></div>';
@@ -109,13 +110,8 @@
                 } else {
                     value += ' ' + MKDAIQ.strings.micrograms;
                 }
-                var style;
-                if(i > 5) {
-                    style = 'display:none;';
-                } else {
-                    style = '';
-                }
-                html += '<tr class="mkdaiq-map-data-entry" style="'+style+'">';
+                style = i > 5 ? 'display:none;' : '';
+                html += '<tr class="mkdaiq-map-data-entry" style="' + style + '">';
                 html += '<td class="mkdaiq-map-data-time">';
                 html += _date.toLocaleTimeString();
                 html += '</td>';
@@ -154,9 +150,10 @@
         var station_filter = self.find('.mkdaiq-select-station');
         var default_station = self.data('default-station');
         var default_unit = self.data('default-unit');
-        var default_timemode = self.data('default-timemode');
+        var timemode = self.data('default-timemode');
         var date = self.data('date');
         var x_labels = parseInt(self.data('date-labels'));
+        var stations_selector = self.data('stations-selector');
 
         var chartInstance = null;
 
@@ -175,25 +172,47 @@
                 },
                 success: function (response) {
 
+                    var colors = MKDAIQ.config.colors;
+
                     if (response.success) {
                         var measurements = response.data.measurements;
+                        var datasets = [];
+                        var stations = station.split(',');
+                        var values, labels, s;
+                        var e = 0;
+                        for(var i in stations) {
 
-                        var values = [];
-                        var labels = [];
-
-                        for (var i in measurements) {
-                            if (!measurements.hasOwnProperty(i)) {
+                            if (!stations.hasOwnProperty(i)) {
                                 continue;
                             }
-                            var value = measurements[i][station];
-                            var date = window.MKDAIQ_convertDate(i);
-                            labels.push(date.toLocaleString());
-                            values.push({
-                                t: date,
-                                y: parseFloat(value),
-                            });
-                        }
 
+                            values = [];
+                            labels = [];
+                            s = stations[i];
+
+                            for (var j in measurements) {
+                                if (!measurements.hasOwnProperty(j)) {
+                                    continue;
+                                }
+                                var value = measurements[j][s];
+                                var date = window.MKDAIQ_convertDate(j);
+                                labels.push(date.toLocaleString());
+                                values.push({
+                                    t: date,
+                                    y: parseFloat(value),
+                                });
+                            }
+
+                            datasets.push({
+                                label: s,
+                                data: values,
+                                fill: false,
+                                borderColor: colors[e],
+                                lineTension: 0.1
+                            });
+
+                            e++;
+                        }
 
                         var options = {
                             responsive: true,
@@ -218,23 +237,18 @@
 							},
                             tooltips: {
                                 callbacks: {
-                                    label: (item) => `${item.yLabel} ${MKDAIQ.strings.micrograms}`,
+                                    label: (item) => `${item.yLabel} ${MKDAIQ.strings.micrograms} (${unit})`,
                                 },
                             },
+                            legend: {
+                                display: true
+                            }
                         };
 
 
                         var data = {
                             labels: labels,
-                            datasets: [
-                                {
-                                    label: station,
-                                    data: values,
-									fill: false,
-									borderColor: "rgb(75, 192, 192)",
-									lineTension: 0.1
-                                }
-                            ]
+                            datasets: datasets
                         };
 
                         if (!chartInstance) {
@@ -262,13 +276,13 @@
         };
 
         // Handle Initialization
-        self.initializeChart(default_station, default_timemode, default_unit, date);
+        self.initializeChart(default_station, timemode, default_unit, date);
 
         // Handme Events
         if (station_filter.length > 0) {
             station_filter.on('change', function (e) {
                 var new_station = $(this).val();
-                self.initializeChart(new_station, default_timemode, default_unit, date);
+                self.initializeChart(new_station, timemode, default_unit, date);
             });
         }
 
@@ -310,6 +324,7 @@
         var unit_filter = self.find('.mkdaiq-select-unit');
         var unit = self.data('unit');
         var date = self.data('date');
+        var zoom = self.data('zoom');
 
         /**
          * Leaflet instance
@@ -321,7 +336,9 @@
         self.initializeMap = function (station, timemode, unit, date) {
 
             var center = [41.6031, 21.4948];
-            var zoom   = 9;
+            if(!zoom) {
+                zoom = 8;
+            }
 
             var map_id = main_element.attr('id');
             $.ajax({
@@ -350,25 +367,37 @@
 
                         var unitInfo = response.data.units[unit];
 
-                        for(var i in response.data.stations) {
+                        var lat,
+                            lng,
+                            name,
+                            stationData,
+                            lastResult,
+                            qualityRange,
+                            qualitySlug,
+                            customIcon,
+                            marker,
+                            popup = null;
+
+                        for (var i in response.data.stations) {
 
                             if (!response.data.stations.hasOwnProperty(i)) {
                                 continue;
                             }
-                            var lat = response.data.stations[i]['lat'];
-                            var lng = response.data.stations[i]['lng'];
-                            var name = response.data.stations[i]['name'];
-                            var stationData = window.MKDAIQ_StationData(i, response.data.measurements);
-                            var lastResult = window.MKDAIQ_LastResult(stationData);
-                            var qualityRange = window.MKDAIQ_Quality_Range(lastResult, unitInfo);
-                            var qualitySlug = qualityRange !== null && qualityRange.hasOwnProperty('slug') ? qualityRange['slug'] : 'undefined';
-                            console.log(qualitySlug);
-                            var customIcon = L.divIcon({className: 'mkdaiq-pin mkdaiq-pin-'+qualitySlug, iconSize: new L.Point(30,30)});
-                            var marker = L.marker([lat, lng], {icon: customIcon}).addTo(mapInstance);
-                            var popup = marker.bindPopup(window.MKDAIQ_Popup(name, stationData, lastResult, unit, date), {
+                            lat = response.data.stations[i]['lat'];
+                            lng = response.data.stations[i]['lng'];
+                            name = response.data.stations[i]['name'];
+                            stationData = window.MKDAIQ_StationData(i, response.data.measurements);
+                            lastResult = window.MKDAIQ_LastResult(stationData);
+                            qualityRange = window.MKDAIQ_Quality_Range(lastResult, unitInfo);
+                            qualitySlug = qualityRange !== null && qualityRange.hasOwnProperty('slug') ? qualityRange['slug'] : 'undefined';
+                            customIcon = L.divIcon({
+                                className: 'mkdaiq-pin mkdaiq-pin-' + qualitySlug,
+                                iconSize: new L.Point(30, 30)
+                            });
+                            marker = L.marker([lat, lng], {icon: customIcon}).addTo(mapInstance);
+                            popup = marker.bindPopup(window.MKDAIQ_Popup(name, stationData, lastResult, unit, date), {
                                 maxWidth: 300
                             });
-
                         }
 
 
@@ -391,12 +420,6 @@
             unit_filter.on('change', function (e) {
                 var new_unit = $(this).val();
                 self.initializeMap(null, null, new_unit, date);
-            });
-        }
-        if (date_filter.length > 0) {
-            date_filter.on('change', function (e) {
-                var new_date = $(this).val();
-                self.initializeMap(null, null, unit, new_date);
             });
         }
     };

@@ -9,6 +9,13 @@
  * @author     Darko Gjorgjijoski <dg@darkog.com>
  */
 class MKDAQAPI {
+
+	/**
+	 * The regions cache
+	 * @var null
+	 */
+	static protected $regions = null;
+
 	/**
 	 * The stations cache
 	 * @var null
@@ -138,6 +145,18 @@ class MKDAQAPI {
 	 */
 	private function get_cache_key( $station, $end_date, $parameter, $time_mode ) {
 		return 'mkdaiq_' . md5( "{$station}{$end_date}{$parameter}{$time_mode}{$this->cache_ttl}" );
+	}
+
+	/**
+	 * Returns the list of the regions
+	 * @return mixed|null
+	 */
+	public static function get_regions() {
+		if ( is_null( self::$regions ) || ! is_array( self::$regions ) ) {
+			self::$regions = include dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'regions.php';
+		}
+
+		return self::$regions;
 	}
 
 

@@ -1,114 +1,71 @@
-=== Plugin Name ===
-Contributors: (this should be a list of wordpress.org userid's)
+=== MKD Air Quality ===
+Contributors: darkog
 Donate link: https://darkog.com
-Tags: comments, spam
-Requires at least: 3.0.1
-Tested up to: 3.4
-Stable tag: 4.3
+Tags: airquality, mk, skopje, macedonia, bitola, tetovo, veles
+Requires at least: 4.5.0
+Tested up to: 5.3
+Requires PHP: 5.4
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
+Show Air Quality data for Macedonia on your website
 
 == Description ==
 
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
+### Example Usage
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+Just a few examples out of a lot combinations :)
 
-A few notes about the sections above:
+#### Line Chart
 
-*   "Contributors" is a comma separated list of wp.org/wp-plugins.org usernames
-*   "Tags" is a comma separated list of tags that apply to the plugin
-*   "Requires at least" is the lowest version that the plugin will work on
-*   "Tested up to" is the highest version that you've *successfully used to test the plugin*. Note that it might work on
-higher versions... this is just the highest one you've verified.
-*   Stable tag should indicate the Subversion "tag" of the latest stable version, or "trunk," if you use `/trunk/` for
-stable.
+Defaults: (`stations_selector=1`, `station=Centar`, `timemode=Week`, `date=today`, `unit=PM10`, `xlabels=0`)
 
-    Note that the `readme.txt` of the stable tag is the one that is considered the defining one for the plugin, so
-if the `/trunk/readme.txt` file says that the stable tag is `4.3`, then it is `/tags/4.3/readme.txt` that'll be used
-for displaying information about the plugin.  In this situation, the only thing considered from the trunk `readme.txt`
-is the stable tag pointer.  Thus, if you develop in trunk, you can update the trunk `readme.txt` to reflect changes in
-your in-development version, without having that information incorrectly disclosed about the current stable version
-that lacks those changes -- as long as the trunk's `readme.txt` points to the correct stable tag.
+PM10 data for today, show the time labels on the X axis. Default station is Centar.
+`[mkdaiq_chart timemode='Day' xlabels=1]`
 
-    If no stable tag is provided, it is assumed that trunk is stable, but you should specify "trunk" if that's where
-you put the stable version, in order to eliminate any doubt.
+PM10 data for the last 7 days, hide the time labels on the X axis. Default station is Rektorat
+`[mkdaiq_chart station='Rektorat' unit='PM10' timemode='Week']`
+
+Show Carbon monoxide levels from Kicevo for the past 7 days. Hide the other stations dropdown
+`[mkdaiq_chart station='Kicevo' stations_selector=0  unit='CO' timemode='Week']`
+
+PM10 from Bitola1 on the 2020 New Year's day. show the time labels on the X axis.
+`[mkdaiq_chart station='Bitola1' unit='PM10' timemode='Day' date='2020-01-01' xlabels=1]`
+
+#### MAP
+
+Defaults: (`date=today`, `unit=PM10`, `zoom=8`, `units_selector=1`)
+
+Draw PM10 map for today, hide the units selector.
+`[mkdaiq_map date='today' units_selector=0 unit='PM10']`
+
+Draw PM10 map with zoom 8 for 2020 New Year's day and show units field.
+`[mkdaiq_map date='2020-01-01' zoom=8]`
+
+
+### TODO
+* Most polluted places
+* Air quality table
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
-
-e.g.
-
-1. Upload `mkd-air-quality.php` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+1. Upload `wp-mkd-air-quality` to the `/wp-content/plugins/`
+2. Activate the plugin through the 'Plugins' menu in WordPress
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= How to contribute?  =
 
-An answer to that question.
-
-= What about foo bar? =
-
-Answer to foo bar dilemma.
+To contribute please submit pull request or issue on the Github repository.
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+1. Line Chart
+2. Map
 
 == Changelog ==
 
 = 1.0 =
 * A change since the previous version.
 * Another change.
-
-= 0.5 =
-* List versions from most recent at top to oldest at bottom.
-
-== Upgrade Notice ==
-
-= 1.0 =
-Upgrade notices describe the reason a user should upgrade.  No more than 300 characters.
-
-= 0.5 =
-This version fixes a security related bug.  Upgrade immediately.
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
-
-== A brief Markdown Example ==
-
-Ordered list:
-
-1. Some feature
-1. Another feature
-1. Something else about the plugin
-
-Unordered list:
-
-* something
-* something else
-* third thing
-
-Here's a link to [WordPress](http://wordpress.org/ "Your favorite software") and one to [Markdown's Syntax Documentation][markdown syntax].
-Titles are optional, naturally.
-
-[markdown syntax]: http://daringfireball.net/projects/markdown/syntax
-            "Markdown is what the parser uses to process much of the readme file"
-
-Markdown uses email style notation for blockquotes and I've been told:
-> Asterisks for *emphasis*. Double it up  for **strong**.
-
-`<?php code(); // goes in backticks ?>`

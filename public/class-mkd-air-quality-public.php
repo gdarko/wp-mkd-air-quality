@@ -106,10 +106,22 @@ class MKD_Air_Quality_Public {
 			'ajax_url' => admin_url( 'admin-ajax.php' ),
 			'nonce'    => wp_create_nonce( 'mkdaiq_nonce' ),
 			'strings'  => array(
-				'micrograms' => 'µg/m3',
-				'not_measured' => __('Not measured', 'mkd-air-quality'),
-				'measurements_not_found' => __('No measurements found.', 'mkd-air-quality'),
-				'unable_to_initialize' => __( 'Unable to initialize the Air Quality element.', 'mkd-air-quality' ),
+				'micrograms'             => 'µg/m3',
+				'not_measured'           => __( 'Not measured', 'mkd-air-quality' ),
+				'measurements_not_found' => __( 'No measurements found.', 'mkd-air-quality' ),
+				'unable_to_initialize'   => __( 'Unable to initialize the Air Quality element.', 'mkd-air-quality' ),
+			),
+			'config'   => array(
+				'colors' => apply_filters( 'mkdaiq_chart_colors', array(
+					'#21e3f6',
+					'#f68f7a',
+					'#e6cae2',
+					'#f6c63e',
+					'#81f689',
+					'#f66b9e',
+					'#5442f6',
+					'#b7000c'
+				) )
 			)
 		) );
 
@@ -136,29 +148,32 @@ class MKD_Air_Quality_Public {
 		wp_enqueue_script( $this->plugin_name );
 
 		$defaults = array(
-			'allowed_stations' => 'all',
-			'default_station'  => 'Centar',
-			'default_timemode' => 'Week', // Week or Day
-			'date'             => '', // defaults to today's date.
-			'unit'             => 'PM10',
-			'date_labels'           => 0,
+			'station'           => 'Centar',
+			'timemode'          => 'Week', // Week or Day
+			'date'              => 'today', // defaults to today's date.
+			'unit'              => 'PM10',
+			'xlabels'           => 0,
+			'stations_selector' => 1,
 		);
 		$args     = shortcode_atts( $defaults, $args );
 
 		// Filter stations
-		$stations = MKDAQAPI::get_stations( $args['allowed_stations'] );
+		$stations = MKDAQAPI::get_stations();
+
+		// Regions
+		$regions = MKDAQAPI::get_regions();
 
 		// validate default time mode
-		if ( ! in_array( $args['default_timemode'],
+		if ( ! in_array( $args['timemode'],
 			array( MKDAQAPI::TIMEMODE_DAY, MKDAQAPI::TIMEMODE_WEEK, MKDAQAPI::TIMEMODE_MONTH ) ) ) {
-			$args['default_timemode'] = MKDAQAPI::TIMEMODE_WEEK;
+			$args['timemode'] = MKDAQAPI::TIMEMODE_WEEK;
 		}
 		// validate default station
-		if ( count( $stations ) > 0 && ! isset( $stations[ $args['default_station'] ] ) ) {
-			$args['default_station'] = $stations[0];
+		if ( count( $stations ) > 0 && ! isset( $stations[ $args['station'] ] ) ) {
+			$args['station'] = $stations[0];
 		}
 		// Validate end date
-		if ( empty( $args['date'] ) ) {
+		if ( empty( $args['date'] ) || $args['date'] === 'today' ) {
 			$args['date'] = date( 'Y-m-d' );
 		}
 
@@ -185,8 +200,10 @@ class MKD_Air_Quality_Public {
 	public function shortcode_map( $args ) {
 
 		$defaults = array(
-			'date' => 'today',
-			'unit' => 'PM10',
+			'date'           => 'today',
+			'unit'           => 'PM10',
+			'units_selector' => 1,
+			'zoom'           => 8,
 		);
 
 		$args          = shortcode_atts( $defaults, $args );

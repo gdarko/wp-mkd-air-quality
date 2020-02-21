@@ -1,32 +1,34 @@
 <?php
+/* @var array $regions */
 /* @var array $stations */
-/* @var string $default_station */
-/* @var string $default_timemode */
+/* @var string $station */
+/* @var string $timemode */
 /* @var string $date */
 /* @var string $unit */
-/* @var string $date_labels */
+/* @var string $xlabels */
+/* @var bool $stations_selector */
 ?>
 
 <div class="mkdaiq mkdaiq-linechart-element"
-     data-date-labels="<?php echo $date_labels; ?>"
+     data-stations-selector="<?php echo $stations_selector; ?>"
+     data-date-labels="<?php echo $xlabels; ?>"
      data-date="<?php echo $date; ?>"
      data-default-unit="<?php echo $unit; ?>"
-     data-default-timemode="<?php echo $default_timemode; ?>"
-     data-default-station="<?php echo $default_station; ?>">
+     data-default-timemode="<?php echo $timemode; ?>"
+     data-default-station="<?php echo $station; ?>">
     <div class="mkdaiq-header">
-        <?php if(count($stations) > 1): ?>
+        <?php if($stations_selector && count($stations) > 1): ?>
         <div class="mkdaiq-header-filter">
             <label><?php _e('Station', 'mkd-air-quality'); ?></label>
             <select class="mkdaiq-control mkdaiq-select-station">
-                <?php foreach($stations as $key => $station): ?>
-                <option value="<?php echo $key; ?>" <?php selected($default_station, $key); ?>><?php echo $station['name']; ?></option>
+                <?php foreach($stations as $key => $s): ?>
+                <option value="<?php echo $key; ?>" <?php selected($station, $key); ?>><?php echo $s['name']; ?></option>
                 <?php endforeach; ?>
+	            <?php foreach($regions as $key => $r): ?>
+                    <option value="<?php echo implode(',',$r['stations']); ?>" <?php selected($station, $key); ?>><?php echo $r['name']; ?></option>
+	            <?php endforeach; ?>
             </select>
         </div>
-        <?php else: ?>
-            <div class="mkdaiq-station-info">
-                <?php _e('Station: ', 'mkd-air-quality'); ?> <span><?php echo $default_station; ?></span>
-            </div>
         <?php endif; ?>
     </div>
     <div class="mkdaiq-main">
