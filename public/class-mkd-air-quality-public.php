@@ -51,6 +51,8 @@ class MKD_Air_Quality_Public {
 	 */
 	private $data_helper;
 
+	private $is_debug;
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -65,6 +67,7 @@ class MKD_Air_Quality_Public {
 		$this->version     = $version;
 		$this->api         = new MKDAQAPI();
 		$this->data_helper = new MKD_Air_Quality_Helper();
+		$this->is_debug = defined( 'WP_DEBUG' ) && WP_DEBUG;
 
 	}
 
@@ -87,11 +90,10 @@ class MKD_Air_Quality_Public {
 	 */
 	public function enqueue_styles() {
 
-		wp_register_style( 'leaflet', plugin_dir_url( __FILE__ ) . 'resources/leaflet/leaflet.css', array(),
-			$this->version, 'all' );
+		wp_register_style( 'leaflet', plugin_dir_url( __FILE__ ) . 'resources/leaflet/leaflet.css', array(), $this->version, 'all' );
 
-		wp_register_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/style.css', array(), $this->version,
-			'all' );
+		$stylesheet = $this->is_debug ? 'css/style.css' : 'css/style.min.css';
+		wp_register_style( $this->plugin_name, plugin_dir_url( __FILE__ ) .$stylesheet, array(), $this->version, 'all' );
 	}
 
 	/**
@@ -101,14 +103,11 @@ class MKD_Air_Quality_Public {
 	 */
 	public function enqueue_scripts() {
 
-		wp_register_script( 'leaflet', plugin_dir_url( __FILE__ ) . 'resources/leaflet/leaflet.js', array( 'jquery' ),
-			time(), true );
+		wp_register_script( 'leaflet', plugin_dir_url( __FILE__ ) . 'resources/leaflet/leaflet.js', array( 'jquery' ), null, true );
+		wp_register_script( 'chartjs', plugin_dir_url( __FILE__ ) . 'resources/chartjs/Chart.min.js', array( 'jquery' ), null, true );
 
-		wp_register_script( 'chartjs', plugin_dir_url( __FILE__ ) . 'resources/chartjs/Chart.min.js', array( 'jquery' ),
-			time(), true );
-
-		wp_register_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/script.js', array( 'jquery' ), time(),
-			true );
+		$js = $this->is_debug ? 'js/script.js' : 'js/script.min.js';
+		wp_register_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . $js, array( 'jquery' ), $this->version, true );
 
 		wp_localize_script( $this->plugin_name, 'MKDAIQ', array(
 			'ajax_url' => admin_url( 'admin-ajax.php' ),

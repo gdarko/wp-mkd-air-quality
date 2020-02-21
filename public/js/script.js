@@ -400,7 +400,6 @@
                             });
                         }
 
-
                     } else {
                         console.error(response.data);
                     }
@@ -425,7 +424,6 @@
     };
 
     $('.mkdaiq-map-element').each(function () {
-        console.log('Initializing map...');
         $(this).mkdaiqMAP();
     })
 
