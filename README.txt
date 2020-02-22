@@ -9,11 +9,27 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Show Air Quality data for Macedonia on your website
+Show Air Quality data provided by the Ministry of environment and physical planning of R. Macedonia
 
 == Description ==
 
-### Example Usage
+### Data Source
+
+The plugin uses the public data provied by the Ministry of Environment and Physical Planning.
+
+The data is measured by physical stations across the country and provided via RESTful service. More information can be found on the AIR Quality portal:
+
+* <a href="http://air.moepp.gov.mk/?page_id=1351&lang=en">Governemnt Air Quality Portal</a>
+
+API endpoint used by the plugin:
+
+```
+http://airquality.moepp.gov.mk/graphs/site/pages/MakeGraph.php?graph=StationLineGraph&station=Kicevo&parameter=PM10&endDate=2020-02-21&timeMode=Day&background=false&lang=mk
+```
+
+The data is cached for 30 minutes by the plugin and it's refreshed hourly.
+
+### Examples
 
 Just a few examples out of a lot combinations :)
 
