@@ -4,7 +4,7 @@ Tags: airquality, skopje, macedonia
 Requires at least: 4.5.0
 Tested up to: 5.3
 Requires PHP: 5.4
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -81,5 +81,8 @@ To contribute please submit pull request or issue on the <a href="https://github
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.1 =
+* Fix loading chart when the map shortcode is above the chart.
+
+= 1.0.0 =
 * Initial Version

@@ -1,12 +1,4 @@
 # MKD Air Quality
-Contributors: darkog
-Tags: airquality, skopje, macedonia
-Requires at least: 4.5.0
-Tested up to: 5.3
-Requires PHP: 5.4
-Stable tag: 1.0.0
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Show air quality data for multiple air quality stations in Macedonia
 
@@ -57,9 +49,6 @@ Defaults: (`date=today`, `unit=PM10`, `type=last`, `order=1`)
 * Draw PM10 rank table for the last 7 days based on the average result ordered by most polluted
 ```[mkdaiq_rank date='today' timemode='Week' type='average' order='1']```
 
-## Credits
-Icons by flaticon
-
 ### Installation
 
 1. Upload `wp-mkd-air-quality` to the `/wp-content/plugins/`
@@ -71,23 +60,6 @@ Icons by flaticon
 2. Install & Activatate
 
 
-### Frequently Asked Questions
-
-### How to contribute?
+## CONTRIBUTIONS
 
 To contribute please submit pull request or issue on the [Github repository](https://github.com/gdarko/wp-mkd-air-quality).
-
-### Screenshots
-
-1. Line Chart (Multiple)
-2. Line Chart (Single)
-3. Map (OSM)
-4. Rank Table
-5. Settings
-
-Check out the official [blog post](https://darkog.com/blog/visualising-the-air-quality-in-macedonia-on-your-wordpress-website/) for a live demo and more examples.
-
-### Changelog
-
-* #### 1.0
-    * Initial Version
