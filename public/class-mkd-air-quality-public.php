@@ -149,7 +149,6 @@ class MKD_Air_Quality_Public {
 
 		wp_enqueue_style( 'leaflet' );
 		wp_enqueue_script( 'leaflet' );
-
 		wp_enqueue_script( 'chartjs' );
 		wp_enqueue_style( $this->plugin_name );
 		wp_enqueue_script( $this->plugin_name );
@@ -206,6 +205,12 @@ class MKD_Air_Quality_Public {
 	 */
 	public function shortcode_map( $args ) {
 
+		wp_enqueue_style( 'leaflet' );
+		wp_enqueue_script( 'leaflet' );
+		wp_enqueue_script( 'chartjs' );
+		wp_enqueue_style( $this->plugin_name );
+		wp_enqueue_script( $this->plugin_name );
+
 		$defaults = array(
 			'date'           => 'today',
 			'unit'           => 'PM10',
@@ -219,13 +224,6 @@ class MKD_Air_Quality_Public {
 		if ( $args['date'] === 'today' ) {
 			$args['date'] = date( 'Y-m-d' );
 		}
-
-		wp_enqueue_style( 'leaflet' );
-		wp_enqueue_script( 'leaflet' );
-
-		wp_enqueue_style( $this->plugin_name );
-		wp_enqueue_script( $this->plugin_name );
-
 
 		$path = plugin_dir_path( __FILE__ ) . 'partials/map.php';
 		ob_start();
