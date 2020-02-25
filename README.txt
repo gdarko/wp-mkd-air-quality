@@ -9,7 +9,7 @@ Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Show Air Quality data provided by the Ministry of environment and physical planning of R. Macedonia
+Display air quality data provided by the Ministry of environment and physical planning of R. Macedonia
 
 == Description ==
 
@@ -28,6 +28,8 @@ http://airquality.moepp.gov.mk/graphs/site/pages/MakeGraph.php?graph=StationLine
 ```
 
 The data is cached for 30 minutes by the plugin and it's refreshed hourly.
+
+Note: The plugin is country specific and will not work with any other countries.
 
 ### Examples
 
