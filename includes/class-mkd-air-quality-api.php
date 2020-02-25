@@ -132,6 +132,14 @@ class MKDAQAPI {
 		return $data;
 	}
 
+	public static function purge_cache() {
+		global $wpdb;
+		foreach ( array( '_transient_timeout_mkdaiq_%', '_transient_mkdaiq_%' ) as $match ) {
+			$prepared = $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", $match );
+			$wpdb->query( $prepared );
+		}
+	}
+
 
 	/**
 	 * Returns the cache key for the parameters

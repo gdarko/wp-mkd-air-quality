@@ -107,6 +107,16 @@ class MKD_Air_Quality {
 	 */
 	private function load_dependencies() {
 
+		/**
+		 * The class responsible for defining all methods for settings manuipulation
+		 * side of the site.
+		 */
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-mkd-air-quality-settings.php';
+
+		/**
+		 * The class responsible for defining all helper methods for data manipulation
+		 * side of the site.
+		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-mkd-air-quality-data-helper.php';
 
 		/**
@@ -166,8 +176,8 @@ class MKD_Air_Quality {
 	private function set_locale() {
 
 		$plugin_i18n = new MKD_Air_Quality_i18n();
-
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
+		$this->loader->add_action( 'plugin_locale', $plugin_i18n, 'setup_plugin_locale', 10, 2 );
 
 	}
 
@@ -184,6 +194,7 @@ class MKD_Air_Quality {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'register_options' );
 
 	}
 

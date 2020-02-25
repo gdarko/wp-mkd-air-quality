@@ -31,6 +31,11 @@ class MKD_Air_Quality_Activator {
 	 */
 	public static function activate() {
 
+		$settings = new MKD_Air_Quality_Settings();
+
+		if ( ! $settings->any() ) {
+			$settings->setup_defaults();
+		}
 	}
 
 }

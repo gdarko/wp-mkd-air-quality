@@ -66,10 +66,6 @@ class MKD_Air_Quality_Cron {
 	 * @hooks into mkdaiq_self_clean
 	 */
 	public function self_clean() {
-		global $wpdb;
-		foreach ( array( '_transient_timeout_mkdaiq_%', '_transient_mkdaiq_%' ) as $match ) {
-			$prepared = $wpdb->prepare( "DELETE FROM {$wpdb->options} WHERE option_name LIKE %s", $match );
-			$wpdb->query( $prepared );
-		}
+		MKDAQAPI::purge_cache();
 	}
 }

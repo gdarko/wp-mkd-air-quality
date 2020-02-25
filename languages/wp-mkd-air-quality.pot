@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MKD Air Quality\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-02-21 23:24+0000\n"
+"POT-Creation-Date: 2020-02-25 11:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -15,8 +15,112 @@ msgstr ""
 "X-Generator: Loco https://localise.biz/\n"
 "X-Loco-Version: 2.3.1; wp-5.3.2"
 
-#: public/class-mkd-air-quality-public.php:332
+#: admin/class-mkd-air-quality-admin.php:93
+msgid "AIR Quality (MK)"
+msgstr ""
+
+#: admin/class-mkd-air-quality-admin.php:111
+msgid "Settings saved successfully"
+msgstr ""
+
+#: admin/class-mkd-air-quality-admin.php:115
+msgid "Cache purged successfully"
+msgstr ""
+
+#: admin/class-mkd-air-quality-admin.php:129
+msgid "Settings"
+msgstr ""
+
+#: admin/class-mkd-air-quality-admin.php:133
+msgid "Language"
+msgstr ""
+
+#: admin/class-mkd-air-quality-admin.php:137
+msgid "Default"
+msgstr ""
+
+#: admin/class-mkd-air-quality-admin.php:139
+msgid "Македонски"
+msgstr ""
+
+#: admin/class-mkd-air-quality-admin.php:147
+msgid "Save settings"
+msgstr ""
+
+#: admin/class-mkd-air-quality-admin.php:148
+msgid "Purge cache"
+msgstr ""
+
+#: public/class-mkd-air-quality-public.php:117
+msgid "Not measured"
+msgstr ""
+
+#: public/class-mkd-air-quality-public.php:118
+msgid "No measurements found."
+msgstr ""
+
+#: public/class-mkd-air-quality-public.php:119
+msgid "Unable to initialize the Air Quality element."
+msgstr ""
+
+#: public/class-mkd-air-quality-public.php:331
+msgid "Last Value"
+msgstr ""
+
+#: public/class-mkd-air-quality-public.php:333
 msgid "Average Value"
+msgstr ""
+
+#: public/class-mkd-air-quality-public.php:336
+msgid "Daily"
+msgstr ""
+
+#: public/class-mkd-air-quality-public.php:338
+msgid "Weekly"
+msgstr ""
+
+#: public/class-mkd-air-quality-public.php:340
+msgid "Monthly"
+msgstr ""
+
+#: includes/data/regions.php:5
+msgid "Skopje Region"
+msgstr ""
+
+#: includes/data/regions.php:18
+msgid "Western Region"
+msgstr ""
+
+#: includes/data/regions.php:29
+msgid "Eastern Region"
+msgstr ""
+
+#: includes/data/stations.php:10
+msgid "Centar"
+msgstr ""
+
+#: includes/data/stations.php:15
+msgid "Karpos"
+msgstr ""
+
+#: includes/data/stations.php:20
+msgid "Gazi Baba"
+msgstr ""
+
+#: includes/data/stations.php:25
+msgid "Lisice"
+msgstr ""
+
+#: includes/data/stations.php:30
+msgid "Rektorat"
+msgstr ""
+
+#: includes/data/stations.php:35
+msgid "Miladinovci"
+msgstr ""
+
+#: includes/data/stations.php:45
+msgid "Gjorce Petrov"
 msgstr ""
 
 #: includes/data/stations.php:50
@@ -27,87 +131,51 @@ msgstr ""
 msgid "Bitola 2"
 msgstr ""
 
-#: includes/data/units.php:16
-msgid "Carbon Monoxide (CO)"
-msgstr ""
-
-#: includes/data/stations.php:10
-msgid "Centar"
-msgstr ""
-
-#: public/class-mkd-air-quality-public.php:335
-msgid "Daily"
-msgstr ""
-
-#. Author of the plugin
-msgid "Darko Gjorgjijoski"
-msgstr ""
-
-#. Description of the plugin
-msgid "Display the AIR quality information for Macedonia on your website."
-msgstr ""
-
-#: includes/data/regions.php:29
-msgid "Eastern Region"
-msgstr ""
-
-#: includes/data/stations.php:20
-msgid "Gazi Baba"
-msgstr ""
-
-#: includes/data/stations.php:45
-msgid "Gjorce Petrov"
-msgstr ""
-
-#: includes/data/stations.php:75
-msgid "Gostivar"
-msgstr ""
-
-#: includes/data/units.php:40 includes/data/units.php:79
-#: includes/data/units.php:118 includes/data/units.php:157
-#: includes/data/units.php:196 includes/data/units.php:235
-#: includes/data/units.php:274
-msgid "High"
-msgstr ""
-
-#. Author URI of the plugin
-msgid "https://darkog.com"
-msgstr ""
-
-#. URI of the plugin
-msgid "https://darkog.com/plugins/mkd-air-quality"
-msgstr ""
-
-#: includes/data/stations.php:15
-msgid "Karpos"
-msgstr ""
-
-#: includes/data/stations.php:95
-msgid "Kavadarci"
-msgstr ""
-
 #: includes/data/stations.php:60
 msgid "Kicevo"
-msgstr ""
-
-#: includes/data/stations.php:90
-msgid "Kocani"
-msgstr ""
-
-#: includes/data/stations.php:100
-msgid "Kumanovo"
-msgstr ""
-
-#: public/class-mkd-air-quality-public.php:330
-msgid "Last Value"
 msgstr ""
 
 #: includes/data/stations.php:65
 msgid "Lazaropole"
 msgstr ""
 
-#: includes/data/stations.php:25
-msgid "Lisice"
+#: includes/data/stations.php:70
+msgid "Tetovo"
+msgstr ""
+
+#: includes/data/stations.php:75
+msgid "Gostivar"
+msgstr ""
+
+#: includes/data/stations.php:80
+msgid "Strumica"
+msgstr ""
+
+#: includes/data/stations.php:85
+msgid "Veles 2"
+msgstr ""
+
+#: includes/data/stations.php:90
+msgid "Kocani"
+msgstr ""
+
+#: includes/data/stations.php:95
+msgid "Kavadarci"
+msgstr ""
+
+#: includes/data/stations.php:100
+msgid "Kumanovo"
+msgstr ""
+
+#: includes/data/units.php:16
+msgid "Carbon Monoxide (CO)"
+msgstr ""
+
+#: includes/data/units.php:22 includes/data/units.php:61
+#: includes/data/units.php:100 includes/data/units.php:139
+#: includes/data/units.php:178 includes/data/units.php:217
+#: includes/data/units.php:256
+msgid "Very low"
 msgstr ""
 
 #: includes/data/units.php:28 includes/data/units.php:67
@@ -124,32 +192,22 @@ msgstr ""
 msgid "Medium"
 msgstr ""
 
-#: includes/data/stations.php:35
-msgid "Miladinovci"
+#: includes/data/units.php:40 includes/data/units.php:79
+#: includes/data/units.php:118 includes/data/units.php:157
+#: includes/data/units.php:196 includes/data/units.php:235
+#: includes/data/units.php:274
+msgid "High"
 msgstr ""
 
-#. Name of the plugin
-msgid "MKD Air Quality"
-msgstr ""
-
-#: public/class-mkd-air-quality-public.php:339
-msgid "Monthly"
+#: includes/data/units.php:46 includes/data/units.php:85
+#: includes/data/units.php:124 includes/data/units.php:163
+#: includes/data/units.php:202 includes/data/units.php:241
+#: includes/data/units.php:280
+msgid "Very High"
 msgstr ""
 
 #: includes/data/units.php:55
 msgid "Nitrogen Dioxide (NO2)"
-msgstr ""
-
-#: public/partials/rank.php:45
-msgid "No data available."
-msgstr ""
-
-#: public/class-mkd-air-quality-public.php:119
-msgid "No measurements found."
-msgstr ""
-
-#: public/class-mkd-air-quality-public.php:118
-msgid "Not measured"
 msgstr ""
 
 #: includes/data/units.php:94
@@ -168,68 +226,46 @@ msgstr ""
 msgid "Particulate Matter (PM2.5)"
 msgstr ""
 
-#: includes/data/stations.php:30
-msgid "Rektorat"
-msgstr ""
-
-#: includes/data/regions.php:5
-msgid "Skopje Region"
-msgstr ""
-
-#: public/partials/rank.php:19
-msgid "Station"
+#: includes/data/units.php:250
+msgid "Sulfur Dioxide (SO2)"
 msgstr ""
 
 #: public/partials/linechart.php:22
 msgid "Station:"
 msgstr ""
 
-#: includes/data/stations.php:80
-msgid "Strumica"
-msgstr ""
-
-#: includes/data/units.php:250
-msgid "Sulfur Dioxide (SO2)"
-msgstr ""
-
-#: includes/data/stations.php:70
-msgid "Tetovo"
-msgstr ""
-
-#: public/class-mkd-air-quality-public.php:120
-msgid "Unable to initialize the Air Quality element."
-msgstr ""
-
 #: public/partials/map.php:13
 msgid "Unit:"
+msgstr ""
+
+#: public/partials/rank.php:19
+msgid "Station"
 msgstr ""
 
 #: public/partials/rank.php:20
 msgid "Value"
 msgstr ""
 
-#: includes/data/stations.php:85
-msgid "Veles 2"
+#: public/partials/rank.php:45
+msgid "No data available."
 msgstr ""
 
-#: includes/data/units.php:46 includes/data/units.php:85
-#: includes/data/units.php:124 includes/data/units.php:163
-#: includes/data/units.php:202 includes/data/units.php:241
-#: includes/data/units.php:280
-msgid "Very High"
+#. Name of the plugin
+msgid "MKD Air Quality"
 msgstr ""
 
-#: includes/data/units.php:22 includes/data/units.php:61
-#: includes/data/units.php:100 includes/data/units.php:139
-#: includes/data/units.php:178 includes/data/units.php:217
-#: includes/data/units.php:256
-msgid "Very low"
+#. Description of the plugin
+msgid "Display the AIR quality information for Macedonia on your website."
 msgstr ""
 
-#: public/class-mkd-air-quality-public.php:337
-msgid "Weekly"
+#. URI of the plugin
+msgid "https://darkog.com/air/"
 msgstr ""
 
-#: includes/data/regions.php:18
-msgid "Western Region"
+#. Author of the plugin
+msgid "Darko Gjorgjijoski"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://darkog.com"
 msgstr ""
