@@ -3,7 +3,7 @@
 /**
  * Plugin Name:       MKD Air Quality
  * Plugin URI:        https://darkog.com/blog/air-quality-mk/
- * Description:       Display the AIR quality information for Macedonia on your website.
+ * Description:       Show air quality data for multiple air quality stations in Macedonia
  * Version:           1.0.0
  * Author:            Darko Gjorgjijoski
  * Author URI:        https://darkog.com
