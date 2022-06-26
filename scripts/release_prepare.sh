@@ -16,6 +16,6 @@ cd $PLUGINS_ROOT_DIR
 zip -r "$PLUGIN_SLUG.zip" "$PLUGIN_SLUG" \
  -x="*scripts*" \
  -x="*.git*" \
- -x="README.md"
+ -x="*README.md*"
 
 echo "New version ready."
