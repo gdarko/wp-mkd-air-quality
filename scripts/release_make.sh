@@ -71,6 +71,7 @@ if [ ! -d "$SVNPATH/tags/$NEWVERSION1" ]; then
   # re-construct PLUGIN_SLUG dir
   echo "Copying latest version to SVN trunk"
   unzip "$PLUGINS_ROOT_DIR/$PLUGIN_SLUG.zip" -d "$SVNTMP"
+  rm -rf ./*
   cp -Rp "$SVNTMP/$PLUGIN_SLUG/"* ./
   rm -rf $SVNTMP
 

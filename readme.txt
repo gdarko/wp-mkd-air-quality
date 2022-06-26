@@ -4,7 +4,7 @@ Tags: airquality, skopje, macedonia
 Requires at least: 4.5.0
 Tested up to: 6.0
 Requires PHP: 5.4
-Stable tag: 1.1.1
+Stable tag: 1.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -81,7 +81,7 @@ To contribute please submit pull request or issue on the <a href="https://github
 
 == Changelog ==
 
-= 1.1.1 =
+= 1.1.2 =
 * Updated readme
 * Fix compatibility with PHP8
 * Fix Javascript errors in admin UI
