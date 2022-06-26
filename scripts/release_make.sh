@@ -3,16 +3,16 @@
 # The difference is that this script lives in the plugin's git repo & doesn't require an existing SVN repo.
 
 # default paths
-SCRIPTDIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
-PLUGINDIR="$( cd -- "$(dirname "$SCRIPTDIR")" >/dev/null 2>&1 ; pwd -P )"
-PLUGINSDIR="$( cd -- "$(dirname "$PLUGINDIR")" >/dev/null 2>&1 ; pwd -P )"
-PLUGINSLUG=$(basename $PLUGINDIR)
-MAINFILE="$PLUGINSLUG.php"
+SCRIPT_DIR="$( cd -- "$(dirname "$0")" >/dev/null 2>&1 ; pwd -P )"
+PLUGIN_DIR="$( cd -- "$(dirname "$SCRIPT_DIR")" >/dev/null 2>&1 ; pwd -P )"
+PLUGINS_ROOT_DIR="$( cd -- "$(dirname "$PLUGIN_DIR")" >/dev/null 2>&1 ; pwd -P )"
+PLUGIN_SLUG=$(basename $PLUGIN_DIR)
+MAINFILE="$PLUGIN_SLUG.php"
 
 # svn config
-SVNTMP="/tmp/$PLUGINSLUG-tmp"
-SVNPATH="/tmp/$PLUGINSLUG"                             # path to a temp SVN repo. No trailing slash required and don't add trunk.
-SVNURL="http://plugins.svn.wordpress.org/$PLUGINSLUG/" # Remote SVN repo on wordpress.org, with no trailing slash
+SVNTMP="/tmp/$PLUGIN_SLUG-tmp"
+SVNPATH="/tmp/$PLUGIN_SLUG"                             # path to a temp SVN repo. No trailing slash required and don't add trunk.
+SVNURL="http://plugins.svn.wordpress.org/$PLUGIN_SLUG/" # Remote SVN repo on wordpress.org, with no trailing slash
 rm -rf $SVNPATH
 rm -rf $SVNTMP
 
@@ -24,16 +24,16 @@ echo
 echo ".........................................."
 echo
 
-bash "$SCRIPTDIR/release_prepare.sh"
-if [[ ! -f "$PLUGINSDIR/$PLUGINSLUG.zip" ]]; then
+bash "$SCRIPT_DIR/release_prepare.sh"
+if [[ ! -f "$PLUGINS_ROOT_DIR/$PLUGIN_SLUG.zip" ]]; then
   echo "Release archive not found. Exiting..."
   exit
 fi
 
 # Check version in readme.txt is the same as plugin file
-NEWVERSION1=$(grep "^Stable tag:" $PLUGINDIR/readme.txt | awk '{print $NF}')
+NEWVERSION1=$(grep "^Stable tag:" $PLUGIN_DIR/readme.txt | awk '{print $NF}')
 echo "readme version: $NEWVERSION1"
-NEWVERSION2=$(grep "Version:" $PLUGINDIR/$MAINFILE | awk '{print $NF}')
+NEWVERSION2=$(grep "Version:" $PLUGIN_DIR/$MAINFILE | awk '{print $NF}')
 echo "$MAINFILE version: $NEWVERSION2"
 
 if [ "$NEWVERSION1" != "$NEWVERSION2" ]; then
@@ -43,7 +43,7 @@ else
   echo "Versions match in README.txt and PHP file. Let's proceed..."
 fi
 
-cd $PLUGINDIR
+cd $PLUGIN_DIR
 if [ ! $(git tag -l "$NEWVERSION1") ]; then
   echo -e "Enter a commit message for this new version: \c"
   read COMMITMSG
@@ -68,10 +68,10 @@ if [ ! -d "$SVNPATH/tags/$NEWVERSION1" ]; then
   echo "Changing directory to SVN and committing to trunk"
   cd $SVNPATH/trunk/
 
-  # re-construct PLUGINSLUG dir
+  # re-construct PLUGIN_SLUG dir
   echo "Copying latest version to SVN trunk"
-  unzip "$PLUGINSDIR/$PLUGINSLUG.zip" -d "$SVNTMP"
-  cp -Rp "$SVNTMP/"* ./
+  unzip "$PLUGINS_ROOT_DIR/$PLUGIN_SLUG.zip" -d "$SVNTMP"
+  cp -Rp "$SVNTMP/$PLUGIN_SLUG/"* ./
   rm -rf $SVNTMP
 
   # Update all the files that are not set to be ignored
@@ -95,5 +95,6 @@ fi
 
 echo "Removing temporary directory $SVNPATH"
 rm -fr $SVNPATH/
+rm -fr "$PLUGINS_ROOT_DIR/$PLUGIN_SLUG.zip"
 
-echo "New version published"
+echo "New version $NEWVERSION1 published!"
