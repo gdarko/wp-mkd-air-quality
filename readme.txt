@@ -2,9 +2,9 @@
 Contributors: darkog
 Tags: airquality, skopje, macedonia
 Requires at least: 4.5.0
-Tested up to: 5.3
+Tested up to: 6.0
 Requires PHP: 5.4
-Stable tag: 1.0.1
+Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,31 +31,31 @@ Just a few examples out of a lot combinations :)
 Defaults: (`stations_selector=1`, `station=Centar`, `timemode=Week`, `date=today`, `unit=PM10`, `xlabels=0`)
 
 * PM10 data for today, show the time labels on the X axis. Default station is Centar.
-<code>[mkdaiq_chart timemode='Day' xlabels=1]</code>
+`[mkdaiq_chart timemode='Day' xlabels=1]`
 * PM10 data for the last 7 days, hide the time labels on the X axis. Default station is Rektorat
-<code>[mkdaiq_chart station='Rektorat' unit='PM10' timemode='Week']</code>
+`[mkdaiq_chart station='Rektorat' unit='PM10' timemode='Week']`
 * Show Carbon monoxide levels from Kicevo for the past 7 days. Hide the other stations dropdown
-<code>[mkdaiq_chart station='Kicevo' stations_selector=0  unit='CO' timemode='Week']</code>
+`[mkdaiq_chart station='Kicevo' stations_selector=0  unit='CO' timemode='Week']`
 * PM10 from Bitola1 on the 2020 New Year's day. show the time labels on the X axis.
-<code>[mkdaiq_chart station='Bitola1' unit='PM10' timemode='Day' date='2020-01-01' xlabels=1]</code>
+`[mkdaiq_chart station='Bitola1' unit='PM10' timemode='Day' date='2020-01-01' xlabels=1]`
 
 ### MAP
 
 Defaults: (`date=today`, `unit=PM10`, `zoom=8`, `units_selector=1`)
 
 * Draw PM10 map for today, hide the units selector.
-<code>[mkdaiq_map date='today' units_selector=0 unit='PM10']</code>
+`[mkdaiq_map date='today' units_selector=0 unit='PM10']`
 * Draw PM10 map with zoom 8 for 2020 New Year's day and show units field.
-<code>[mkdaiq_map date='2020-01-01' zoom=8]</code>
+`[mkdaiq_map date='2020-01-01' zoom=8]`
 
 ### RANK
 
 Defaults: (`date=today`, `unit=PM10`, `type=last`, `order=1`)
 
 * Draw PM10 rank table for today based on the last known result ordered by most polluted
-<code>[mkdaiq_rank date='today' timemode='Day' type='last' order='1']</code>
+`[mkdaiq_rank date='today' timemode='Day' type='last' order='1']`
 * Draw PM10 rank table for the last 7 days based on the average result ordered by most polluted
-<code>[mkdaiq_rank date='today' timemode='Week' type='average' order='1']</code>
+`[mkdaiq_rank date='today' timemode='Week' type='average' order='1']`
 
 ## Credits
 Icons by flaticon
@@ -80,6 +80,11 @@ To contribute please submit pull request or issue on the <a href="https://github
 5. Settings
 
 == Changelog ==
+
+= 1.1.0 =
+* Updated readme
+* Fix compatibility with PHP8
+* Fix Javascript errors in admin UI
 
 = 1.0.1 =
 * Fix loading chart when the map shortcode is above the chart.

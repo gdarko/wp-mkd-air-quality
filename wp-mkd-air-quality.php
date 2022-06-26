@@ -4,7 +4,7 @@
  * Plugin Name:       MKD Air Quality
  * Plugin URI:        https://darkog.com/blog/air-quality-mk/
  * Description:       Show air quality data for multiple air quality stations in Macedonia
- * Version:           1.0.1
+ * Version:           1.1.0
  * Author:            Darko Gjorgjijoski
  * Author URI:        https://darkog.com
  * License:           GPL-2.0+
@@ -18,7 +18,7 @@ if ( ! defined('WPINC')) {
     die;
 }
 
-define('MKD_AIR_QUALITY_VERSION', '1.0.1');
+define('MKD_AIR_QUALITY_VERSION', '1.1.0');
 
 function activate_mkd_air_quality()
 {
